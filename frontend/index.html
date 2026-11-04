@@ -1,0 +1,88 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livestock Health Monitoring</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>🐄 Livestock Health Monitoring</h1>
+        <p>Farm Operations Management Platform</p>
+    </header>
+
+    <nav>
+        <button onclick="showSection('dashboard')">Dashboard</button>
+        <button onclick="showSection('animals')">Animals</button>
+        <button onclick="showSection('observations')">Health Records</button>
+        <button onclick="showSection('alerts')">Alerts</button>
+        <button onclick="showSection('vaccinations')">Vaccinations</button>
+    </nav>
+
+    <main>
+        <section id="dashboard" class="section">
+            <h2>Farm Dashboard</h2>
+            <div class="cards">
+                <div class="card">
+                    <h3>Total Animals</h3>
+                    <p id="totalAnimals">0</p>
+                </div>
+                <div class="card">
+                    <h3>New Alerts</h3>
+                    <p id="totalAlerts">0</p>
+                </div>
+                <div class="card">
+                    <h3>Vaccinations</h3>
+                    <p id="totalVaccinations">0</p>
+                </div>
+            </div>
+            <button onclick="loadDashboard()">Refresh Dashboard</button>
+        </section>
+
+        <section id="animals" class="section hidden">
+            <h2>Register Animal</h2>
+            <form id="animalForm">
+                <input id="tag" placeholder="Animal Tag" required>
+                <input id="species" placeholder="Species (Cow, Goat)" required>
+                <input id="breed" placeholder="Breed">
+                <input id="age" type="number" placeholder="Age">
+                <button type="submit">Register Animal</button>
+            </form>
+            <h2>Animal List</h2>
+            <button onclick="loadAnimals()">Refresh Animals</button>
+            <div id="animalList"></div>
+        </section>
+
+        <section id="observations" class="section hidden">
+            <h2>Record Health Observation</h2>
+            <form id="observationForm">
+                <input id="observationAnimalId" type="number" placeholder="Animal ID" required>
+                <input id="temperature" type="number" step="0.1" placeholder="Temperature (°C)" required>
+                <input id="notes" placeholder="Health Notes">
+                <button type="submit">Save Observation</button>
+            </form>
+        </section>
+
+        <section id="alerts" class="section hidden">
+            <h2>Health Alerts</h2>
+            <button onclick="loadAlerts()">Refresh Alerts</button>
+            <div id="alertList"></div>
+        </section>
+
+        <section id="vaccinations" class="section hidden">
+            <h2>Record Vaccination</h2>
+            <form id="vaccinationForm">
+                <input id="vaccineAnimalId" type="number" placeholder="Animal ID" required>
+                <input id="vaccineName" placeholder="Vaccine Name" required>
+                <input id="vaccineDate" type="date" required>
+                <button type="submit">Save Vaccination</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
+```
