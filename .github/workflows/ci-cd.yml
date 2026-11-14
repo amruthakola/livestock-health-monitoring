@@ -1,0 +1,38 @@
+
+name: Livestock CI-CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Validate Docker Compose
+        run: docker compose config
+
+      - name: Build and Start Application
+        run: docker compose up -d --build
+
+      - name: Test Backend Health
+        run: |
+          for i in {1..30}; do
+            if curl -fsS http://localhost:8080/api/health; then
+              echo "Backend health check passed"
+              exit 0
+            fi
+            sleep 2
+          done
+          docker compose logs
+          exit 1
+
+      - name: Stop Application
+        if: always()
+        run: docker compose down
